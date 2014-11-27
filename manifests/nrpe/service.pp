@@ -1,3 +1,4 @@
+#Type to create the nagios config to poll nrpe checks.
 define nagios::nrpe::service (
   $check_command,
   $check_period = '',
@@ -14,7 +15,7 @@ define nagios::nrpe::service (
   $nrpe_command = 'check_nrpe_1arg',
   ) {
 
-  $nrpe = $osfamily ? {
+  $nrpe = $::osfamily ? {
     RedHat  =>  'nrpe',
     Debian  =>  'nagios-nrpe-server',
     default =>  'nagios-nrpe-server',

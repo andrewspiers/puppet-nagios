@@ -1,10 +1,11 @@
+#Type to create nagios check commands.
 define nagios::nrpe::command ($check_command) {
 
   File <| tag == 'nrpe' |>
   Package <| tag == 'nrpe' |>
   Service <| tag == 'nrpe' |>
 
-  $nrpe = $osfamily ? {
+  $nrpe = $::osfamily ? {
     RedHat  =>  'nrpe',
     Debian  =>  'nagios-nrpe-server',
     default =>  'nagios-nrpe-server',

@@ -1,20 +1,21 @@
+# Set up the nrpe service to report to servers nagios::hosts.
 class nagios::nrpe {
 
   $nagios_hosts = hiera('nagios::hosts', [])
 
-  $nrpe = $osfamily ? {
+  $nrpe = $::osfamily ? {
     RedHat  =>  'nrpe',
     Debian  =>  'nagios-nrpe-server',
     default =>  'nagios-nrpe-server',
   }
 
-  $nrpe_plugin = $osfamily ? {
+  $nrpe_plugin = $::osfamily ? {
     RedHat  =>  'nagios-plugins-nrpe',
     Debian  =>  'nagios-nrpe-plugin',
     default =>  'nagios-nrpe-plugin',
   }
 
-  $nagios_plugins_contrib = $osfamily ? {
+  $nagios_plugins_contrib = $::osfamily ? {
     RedHat  =>  'nagios-plugins-all',
     Debian  =>  'nagios-plugins-contrib',
     default  =>  'nagios-plugins-contrib',
