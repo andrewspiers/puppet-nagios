@@ -40,7 +40,7 @@ class nagios::nrpe {
 
   user { 'nagios':
     groups  => ['users', 'puppet'],
-    require => Package[ $nrpe ],
+    require => Package[nagios-nrpe-server],
   }
 
   @service { $nrpe :
