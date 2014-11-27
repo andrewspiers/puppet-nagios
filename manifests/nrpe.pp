@@ -53,8 +53,10 @@ class nagios::nrpe {
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    require => Package['nagios-nrpe-server'],
-    notify  => Service['nagios-nrpe-server'],
+    #require => Package['nagios-nrpe-server'],
+    #notify  => Service['nagios-nrpe-server'],
+    require => Package[ $nrpe ],
+    notify  => Service[ $nrpe ],
     content => template('nagios/nrpe.erb'),
     tag     => 'nrpe',
   }
