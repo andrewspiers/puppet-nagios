@@ -59,7 +59,8 @@ class nagios::nrpe {
     tag     => 'nrpe',
   }
 
-  $plugin_dirs = ['/etc/nagios-plugins', '/etc/nagios-plugins/config']
+  $plugin_dirs = ['/etc/nagios-plugins', '/etc/nagios-plugins/config',
+                  '/etc/nagios/nrpe.d',]
 
   file { $plugin_dirs:
     ensure  => directory,
@@ -98,13 +99,6 @@ define nagios::nrpe::command ($check_command) {
   File <| tag == 'nrpe' |>
   Package <| tag == 'nrpe' |>
   Service <| tag == 'nrpe' |>
-
-  file { "/etc/nagios/nrpe.d":
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    ensure  => directory,
-  }
 
   file { "/etc/nagios/nrpe.d/${name}.cfg":
     mode    => '0644',
