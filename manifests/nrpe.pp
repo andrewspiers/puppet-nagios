@@ -45,7 +45,7 @@ class nagios::nrpe {
 
   @service { $nrpe :
     ensure  => running,
-    require => Package[ $nrpe ],
+    require => Package['nagios-nrpe-server'],
     tag     => 'nrpe',
   }
 
@@ -128,7 +128,8 @@ define nagios::nrpe::service (
   ) {
 
   # Only add NRPE checks if this host is using NRPE
-  if defined(Service['nagios-nrpe-server']) {
+  #if defined(Service['nagios-nrpe-server']) {
+  if defined(Service[ $nrpe ]) {
     nagios::nrpe::command {
       $name:
         check_command => $check_command;
