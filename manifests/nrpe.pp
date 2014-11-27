@@ -99,11 +99,18 @@ define nagios::nrpe::command ($check_command) {
   Package <| tag == 'nrpe' |>
   Service <| tag == 'nrpe' |>
 
+  file { "/etc/nagios/nrpe.d":
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+    ensure  => directory,
+  }
+
   file { "/etc/nagios/nrpe.d/${name}.cfg":
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    require => Package['nagios-nrpe-server'],
+    require => [ Package['nagios-nrpe-server'], File['/etc/nagios/nrpe.d'], ],
     notify  => Service['nagios-nrpe-server'],
     content => template('nagios/nrpe_command.erb');
   }
