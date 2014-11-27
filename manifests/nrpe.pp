@@ -43,7 +43,7 @@ class nagios::nrpe {
     require => Package['nagios-nrpe-server'],
   }
 
-  @service { 'nagios-nrpe-server':
+  @service { $nrpe :
     ensure  => running,
     require => Package['nagios-nrpe-server'],
     tag     => 'nrpe',
