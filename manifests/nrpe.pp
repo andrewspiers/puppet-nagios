@@ -20,7 +20,7 @@ class nagios::nrpe {
     default  =>  'nagios-plugins-contrib',
   }
 
-  @package {
+  package {
     $nrpe :
       ensure => present,
       alias  => 'nagios-nrpe-server',
