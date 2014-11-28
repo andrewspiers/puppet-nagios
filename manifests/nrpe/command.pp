@@ -9,8 +9,8 @@ define nagios::nrpe::command ($check_command) {
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    require => [ Package[ $nagios::nrpe::nrpe ], File['/etc/nagios/nrpe.d'], ],
-    notify  => Service[ $nagios::nrpe::nrpe ],
+    require => [ Package[ $nagios::nrpe::nrpe_package ], File['/etc/nagios/nrpe.d'], ],
+    notify  => Service[ $nagios::nrpe::nrpe_package ],
     content => template('nagios/nrpe_command.erb');
   }
 

@@ -3,7 +3,7 @@ class nagios::nrpe {
 
   $nagios_hosts = hiera('nagios::hosts', [])
 
-  $nrpe = $::osfamily ? {
+  $nrpe_package = $::osfamily ? {
     RedHat  =>  'nrpe',
     Debian  =>  'nagios-nrpe-server',
     default =>  'nagios-nrpe-server',
@@ -22,7 +22,7 @@ class nagios::nrpe {
   }
 
   @package {
-    $nrpe :
+    $nrpe_package :
       ensure => present,
       alias  => 'nagios-nrpe-server',
       tag    => 'nrpe';
@@ -44,7 +44,7 @@ class nagios::nrpe {
     require => Package['nagios-nrpe-server'],
   }
 
-  @service { $nrpe :
+  @service { $nrpe_package :
     ensure  => running,
     require => Package['nagios-nrpe-server'],
     tag     => 'nrpe',
