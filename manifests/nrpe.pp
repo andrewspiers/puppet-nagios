@@ -56,8 +56,8 @@ class nagios::nrpe {
     group   => 'root',
     #require => Package['nagios-nrpe-server'],
     #notify  => Service['nagios-nrpe-server'],
-    require => Package[ $nrpe ],
-    notify  => Service[ $nrpe ],
+    require => Package[ $nrpe_package ],
+    notify  => Service[ $nrpe_package ],
     content => template('nagios/nrpe.erb'),
     tag     => 'nrpe',
   }
