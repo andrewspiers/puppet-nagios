@@ -15,12 +15,6 @@ define nagios::nrpe::service (
   $nrpe_command = 'check_nrpe_1arg',
   ) {
 
-#  $nrpe = $::osfamily ? {
-#    RedHat  =>  'nrpe',
-#    Debian  =>  'nagios-nrpe-server',
-#    default =>  'nagios-nrpe-server',
-#  }
-
   # Only add NRPE checks if this host is using NRPE
   #if defined(Service['nagios-nrpe-server']) {
   if defined(Service[ $nagios::nrpe::nrpe ]) {

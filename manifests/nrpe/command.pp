@@ -5,12 +5,6 @@ define nagios::nrpe::command ($check_command) {
   Package <| tag == 'nrpe' |>
   Service <| tag == 'nrpe' |>
 
-#  $nrpe = $::osfamily ? {
-#    RedHat  =>  'nrpe',
-#    Debian  =>  'nagios-nrpe-server',
-#    default =>  'nagios-nrpe-server',
-#  }
-
   file { "/etc/nagios/nrpe.d/${name}.cfg":
     mode    => '0644',
     owner   => 'root',
